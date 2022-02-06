@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FilmsStorageDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="FilmID" />
+            <PropertyRef Name="FilmName" />
+            <PropertyRef Name="ReleaseYear" />
+            <PropertyRef Name="fk_GenreID" />
+            <PropertyRef Name="fk_UserID" />
+            <PropertyRef Name="FileName" />
+            <PropertyRef Name="FilePath" />
+          </Key>
+          <Property Name="FilmID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ReleaseYear" Type="int" Nullable="false" />
+          <Property Name="fk_GenreID" Type="int" Nullable="false" />
+          <Property Name="fk_UserID" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FilmDescription" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenreName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="640" Nullable="false" />
+          <Property Name="Password" Type="binary" MaxLength="64" Nullable="false" />
+          <Property Name="RegisteredAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Film_Genre">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="fk_GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="fk_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FilmsStorageDBModelStoreContainer">
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film" EntityType="Self.Film" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Film].[FilmID] AS [FilmID], 
+    [Film].[FilmName] AS [FilmName], 
+    [Film].[ReleaseYear] AS [ReleaseYear], 
+    [Film].[fk_GenreID] AS [fk_GenreID], 
+    [Film].[fk_UserID] AS [fk_UserID], 
+    [Film].[FileName] AS [FileName], 
+    [Film].[FilePath] AS [FilePath], 
+    [Film].[FilmDescription] AS [FilmDescription]
+    FROM [dbo].[Film] AS [Film]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Film_Genre" Association="Self.FK_Film_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Film" EntitySet="Film" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_User" Association="Self.FK_Film_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Film" EntitySet="Film" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FilmsStorageDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenreName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Films" Relationship="Self.FK_Film_Genre" FromRole="Genre" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="640" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="Binary" MaxLength="64" FixedLength="true" Nullable="false" />
+          <Property Name="RegisteredAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Films" Relationship="Self.FK_Film_User" FromRole="User" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="FilmID" />
+            <PropertyRef Name="FilmName" />
+            <PropertyRef Name="ReleaseYear" />
+            <PropertyRef Name="fk_GenreID" />
+            <PropertyRef Name="fk_UserID" />
+            <PropertyRef Name="FileName" />
+            <PropertyRef Name="FilePath" />
+          </Key>
+          <Property Name="FilmID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReleaseYear" Type="Int32" Nullable="false" />
+          <Property Name="fk_GenreID" Type="Int32" Nullable="false" />
+          <Property Name="fk_UserID" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FilmDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK_Film_Genre" FromRole="Film" ToRole="Genre" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Film_User" FromRole="Film" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Film_Genre">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="fk_GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Film_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="fk_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FilmsStorageDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Films" EntityType="Self.Film" />
+          <AssociationSet Name="FK_Film_Genre" Association="Self.FK_Film_Genre">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_User" Association="Self.FK_Film_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FilmsStorageDBModelStoreContainer" CdmEntityContainer="FilmsStorageDB">
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="FilmsStorageDBModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="GenreName" ColumnName="GenreName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FilmsStorageDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RegisteredAt" ColumnName="RegisteredAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="FilmsStorageDBModel.Film">
+              <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="FilmName" ColumnName="FilmName" />
+                <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
+                <ScalarProperty Name="fk_GenreID" ColumnName="fk_GenreID" />
+                <ScalarProperty Name="fk_UserID" ColumnName="fk_UserID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FilmDescription" ColumnName="FilmDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

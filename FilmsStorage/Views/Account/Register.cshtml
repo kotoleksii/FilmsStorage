@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control" } )
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PasswordRepetition, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.PasswordRepetition, new { @class = "form-control" } )
+                @Html.PasswordFor(model => model.PasswordRepetition, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PasswordRepetition, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,8 +51,18 @@
                 <input type="submit" value="Register" class="btn btn-success" />
             </div>
         </div>
+
     </div>
 }
+
+@if (ViewBag.ErrorMsg != null)
+{
+    <div class="bg-danger error-box">
+        @ViewBag.ErrorMsg
+    </div>
+
+}
+
 
 @if (!string.IsNullOrEmpty(Model.Password))
 {

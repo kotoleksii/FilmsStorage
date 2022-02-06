@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 
 using FilmsStorage.Models;
+using FilmsStorage.Models.Entities;
+using FilmsStorage.DAL;
+using FilmsStorage.Mappers;
 
 namespace FilmsStorage.Controllers
 {
@@ -31,9 +34,27 @@ namespace FilmsStorage.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: register user
-                // create login cookie
-                // redirect to profile
+                // Перевіримо чи є даний користувач в базі
+                User registerUser = _DAL.Users.ByLogin(registerModel.LoginName);
+
+                if(registerUser == null)
+                {
+                    User userRegisterEntity = UserMapper.FromRegisterModel(registerModel);
+                    userRegisterEntity.RegisteredAt = DateTime.Now;
+
+                    User registeredUser = _DAL.Users.Register(userRegisterEntity);
+
+                    // TODO:  create login cookie
+                    // TODO:  redirect to profile
+                }
+                else
+                {
+                    ViewBag.ErrorMsg = $"User {registerModel.LoginName} is already registered";
+                    
+                    return View(registerModel);
+                }
+                
+                
                 return RedirectToAction("Profile");
             }
             else
