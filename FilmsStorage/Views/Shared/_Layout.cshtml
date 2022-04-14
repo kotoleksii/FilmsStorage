@@ -6,12 +6,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Films Storage</title>
-    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modern")
-
-    @*<script src="~/Scripts/modernizr-2.8.3.js"></script>*@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -32,7 +28,8 @@
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Register account", "Register", "Account", null, new { @class = "btn btn-info" }) </li>
+                        <li>@Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-info" }) </li>
+                        <li>@Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-success" }) </li>
                     }
                 </ul>
             </div>
@@ -48,7 +45,5 @@
     </div>
 
     @Scripts.Render("~/bundles/js")
-    @*<script src="~/Scripts/jquery-3.6.0.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>*@
 </body>
 </html>

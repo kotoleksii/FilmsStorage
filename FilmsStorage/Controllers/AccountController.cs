@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 using FilmsStorage.Models;
 using FilmsStorage.Models.Entities;
 using FilmsStorage.DAL;
 using FilmsStorage.Mappers;
+using FilmsStorage.SL;
 
 namespace FilmsStorage.Controllers
 {
@@ -22,6 +24,63 @@ namespace FilmsStorage.Controllers
             return View();
         }
 
+        #region Login
+        // Вікно логіну
+        public ViewResult Login()
+        {
+            return View(new LoginModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Перевіряємо наявність користувача в базі
+                User registeredUser = _DAL.Users.ByLogin(loginModel.LoginName);
+
+                //if user registered
+                if (registeredUser != null)
+                {
+                    //Password check
+                    bool isPasswordValid = _SL.Hasher.checkPassword(registeredUser.Password, loginModel.Password);
+
+                    if (isPasswordValid)
+                    {
+                        _SL.Cookies.SetLoginCookie(registeredUser);
+
+                        return RedirectToAction("Index", "Account");
+                        //TODO: create login cookie
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMsg = "Wrong Password";
+                        return View();
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorMsg = "No Such User";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMsg = "Invalid Login Form";
+                return View();
+            }
+        }
+        #endregion
+
+        public RedirectToRouteResult Logout()
+        {
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("Login");
+        }
+
+        #region Register
         // Вікно реєстрації
         public ViewResult Register()
         {
@@ -30,6 +89,7 @@ namespace FilmsStorage.Controllers
         
         // Метод-обробник форми реєстрації
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel registerModel)
         {
             if (ModelState.IsValid)
@@ -37,6 +97,7 @@ namespace FilmsStorage.Controllers
                 // Перевіримо чи є даний користувач в базі
                 User registerUser = _DAL.Users.ByLogin(registerModel.LoginName);
 
+                // Такого користувача немає - можна додавати
                 if(registerUser == null)
                 {
                     User userRegisterEntity = UserMapper.FromRegisterModel(registerModel);
@@ -45,7 +106,7 @@ namespace FilmsStorage.Controllers
                     User registeredUser = _DAL.Users.Register(userRegisterEntity);
 
                     // TODO:  create login cookie
-                    // TODO:  redirect to profile
+                    return RedirectToAction("Index", "Account");
                 }
                 else
                 {
@@ -53,16 +114,16 @@ namespace FilmsStorage.Controllers
                     
                     return View(registerModel);
                 }
-                
-                
-                return RedirectToAction("Profile");
             }
             else
             {
                 //Помилки у формі реєстрації
-
+                ViewBag.ErrorMsg = "Invalid Register Form";
                 return View(registerModel);
             }
         }
+        #endregion 
+
+
     }
 }

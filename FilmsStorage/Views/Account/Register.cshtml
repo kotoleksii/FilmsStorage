@@ -55,15 +55,9 @@
     </div>
 }
 
-@if (ViewBag.ErrorMsg != null)
-{
-    @*<div class="bg-danger error-box">*@
-    <div class="alert alert-danger" role="alert">
-        @ViewBag.ErrorMsg
-    </div>
-
+@{
+    Html.RenderPartial("ShowError");
 }
-
 
 @if (!string.IsNullOrEmpty(Model.Password))
 {
