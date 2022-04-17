@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
-
+﻿using FilmsStorage.DAL;
+using FilmsStorage.Mappers;
 using FilmsStorage.Models;
 using FilmsStorage.Models.Entities;
-using FilmsStorage.DAL;
-using FilmsStorage.Mappers;
 using FilmsStorage.SL;
+using System;
+using System.Web.Mvc;
+using System.Web.Security;
 
 namespace FilmsStorage.Controllers
 {
@@ -17,11 +13,15 @@ namespace FilmsStorage.Controllers
     {
         // Особистий профіль користувача. Дозвіл на вхід за логіном
         [Authorize]
-        // Фільтр вимагає щоб користувач був залогіненим
+        // Фільтр вимагає щоб користувач був залогінений
         // TODO: Замінити штатний фільтр на свій
         public ViewResult Index()
         {
-            return View();
+            string userLoginName = User.Identity.Name;
+
+            User userDetails = _DAL.Users.ByLogin(userLoginName);
+
+            return View(userDetails);
         }
 
         #region Login
@@ -51,7 +51,6 @@ namespace FilmsStorage.Controllers
                         _SL.Cookies.SetLoginCookie(registeredUser);
 
                         return RedirectToAction("Index", "Account");
-                        //TODO: create login cookie
                     }
                     else
                     {

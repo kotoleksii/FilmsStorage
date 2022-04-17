@@ -1,5 +1,4 @@
-﻿
-using FilmsStorage.Models.Entities;
+﻿using FilmsStorage.Models.Entities;
 using FilmsStorage.Models.Serialization;
 using System.Security.Cryptography;
 using System.Text;
@@ -86,5 +85,4 @@ namespace FilmsStorage.SL
             }
         }
     }
-    
 }

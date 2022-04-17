@@ -186,6 +186,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\_DAL.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +233,8 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\ShowError.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Shared\SocialLinks.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -242,6 +245,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="BLL\" />
+    <Folder Include="Views\Files\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
