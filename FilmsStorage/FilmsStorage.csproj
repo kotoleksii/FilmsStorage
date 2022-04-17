@@ -217,6 +217,7 @@
     <Compile Include="Models\Entities\User.cs">
       <DependentUpon>FilmsDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilmAddModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\Serialization\UserSerializatonModel.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Views\Shared\ShowError.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Shared\SocialLinks.cshtml" />
+    <Content Include="Views\Files\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,7 +247,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="BLL\" />
-    <Folder Include="Views\Files\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

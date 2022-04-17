@@ -44,6 +44,21 @@ namespace FilmsStorage.DAL
 
         public static class Films {
         
+            //public static long Add()
+            //{
+
+            //}
+        }
+
+        public static class Genres
+        {
+            public static List<Genre> All()
+            {
+                using (var db = new FilmsStorageDB())
+                {
+                    return db.Genres.ToList();
+                }
+            }
         }
     }
 }
