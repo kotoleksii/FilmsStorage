@@ -10,31 +10,34 @@
     @Scripts.Render("~/bundles/modern")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
             @*<div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Films Storage", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>*@
-            <div class="">
-                <ul class="nav navbar-nav">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Films Storage", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>*@
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("My Profile", "Index", "Account", null, new { @class = "btn btn-info" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink("My Profile", "Index", "Account", null, new { @class = "btn btn-info" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink("Upload", "Add", "Files", null, new { @class = "btn btn-warning" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn btn-danger" }) </li>
+
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-info" }) </li>
-                        <li>@Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-success" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-info" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-success" }) </li>
                     }
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
     <div class="container body-content">
         @RenderBody()

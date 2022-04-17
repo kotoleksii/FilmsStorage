@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GenreID, labelText: "Genre" ,htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.GenreID, genresSelectedListItems)
+                @Html.DropDownListFor(m => m.GenreID, genresSelectedListItems, new { @class = "form-select" } )
                 @Html.ValidationMessageFor(model => model.GenreID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FileName,labelText: "Choose File:" ,htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-               <input type="file" name="film"/>
+               <input type="file" name="film" class="form-control"/>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-10 mt-2">
                 <input type="submit" value="Upload Film" class="btn btn-success" />
             </div>
         </div>
