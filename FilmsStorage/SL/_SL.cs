@@ -7,6 +7,8 @@ using System.Configuration;
 using System;
 using System.Web.Security;
 using System.Web;
+using System.Configuration;
+using System.IO;
 
 namespace FilmsStorage.SL
 {
@@ -82,6 +84,58 @@ namespace FilmsStorage.SL
                 authCookie.Expires = authTicket.Expiration;
 
                 HttpContext.Current.Response.Cookies.Add(authCookie);
+            }
+        }
+
+        public static class Files
+        {
+            public static FileSaveResult SaveFilm(HttpPostedFileBase postedFile, int uploadedByUser)
+            {
+                FileSaveResult fileUploadResult = new FileSaveResult();
+
+                try
+                {
+                    string fileSaveFolder = ConfigurationManager.AppSettings["FileUploadFolder"];
+                    string webSiteFolder = HttpContext.Current.Server.MapPath("~");
+
+                    string fileSaveRootFolder = Path.Combine(webSiteFolder, fileSaveFolder);
+                    string userSaveFolder = Path.Combine(fileSaveRootFolder, uploadedByUser.ToString());
+                    string fileSaveName = postedFile.FileName;
+
+                    if (!Directory.Exists(fileSaveRootFolder))
+                    {
+                        Directory.CreateDirectory(fileSaveRootFolder);
+                    }
+
+                    if (!Directory.Exists(userSaveFolder))
+                    {
+                        Directory.CreateDirectory(userSaveFolder);
+                    }
+
+                    if (File.Exists(Path.Combine(userSaveFolder, fileSaveName)))
+                    {
+                        //rename strategy: OriginalFileName_Ticks.Ext
+                        fileSaveName = Path.GetFileNameWithoutExtension(fileSaveName)
+                            + "_"
+                            + DateTime.Now.Ticks
+                            + Path.GetExtension(fileSaveName);
+                    }
+
+                    string fileSaveFullPath = Path.Combine(userSaveFolder, fileSaveName);
+
+                    postedFile.SaveAs(fileSaveFullPath);
+
+                    fileUploadResult.isSaved = true;
+                    fileUploadResult.FileName = fileSaveName;
+                    fileUploadResult.FilePath = userSaveFolder;
+                }
+                catch (Exception ex)
+                {
+
+                    fileUploadResult.Error = ex;
+                }
+
+                return fileUploadResult;
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Web;
 
 using FilmsStorage.Models.Entities;
 using FilmsStorage.Models;
+using FilmsStorage.Mappers;
 
 namespace FilmsStorage.DAL
 {
@@ -43,11 +44,19 @@ namespace FilmsStorage.DAL
 
 
         public static class Films {
-        
-            //public static long Add()
-            //{
 
-            //}
+            public static Film Add(FilmAddModel addFilmModel)
+            {
+                using(var db = new FilmsStorageDB())
+                {
+                    Film filmToAdd = FilmMapper.FromAddModel(addFilmModel);
+
+                    db.Films.Add(filmToAdd);
+                    db.SaveChanges();
+
+                    return filmToAdd;
+                }
+            }
         }
 
         public static class Genres

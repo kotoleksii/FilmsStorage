@@ -186,12 +186,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\_DAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\FilmMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Models\Entities\Film.cs">
       <DependentUpon>FilmsDBModel.tt</DependentUpon>
@@ -219,9 +221,12 @@
     </Compile>
     <Compile Include="Models\FilmAddModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Login\CustomPrincipal.cs" />
+    <Compile Include="Models\Login\ICustomPrincipal.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\Serialization\UserSerializatonModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SL\FileSaveResult.cs" />
     <Compile Include="SL\_SL.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +252,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="BLL\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

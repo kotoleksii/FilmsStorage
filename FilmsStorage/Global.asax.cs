@@ -4,8 +4,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Script.Serialization;
 using System.Web.Security;
-
+using FilmsStorage.Models.Login;
+using FilmsStorage.Models.Serialization;
 
 namespace FilmsStorage
 {
@@ -46,6 +48,13 @@ namespace FilmsStorage
                 authCookie.Expires = prolongatedAuthTicket.Expiration;
 
                 HttpContext.Current.Response.Cookies.Add(authCookie);
+
+                JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                
+                UserSerializatonModel userSerializatonModel
+                    = jsonSerializer.Deserialize<UserSerializatonModel>(originalAuthTicket.UserData);
+
+                HttpContext.Current.User = new CustomPrincipal(originalAuthTicket.Name, userSerializatonModel.UserID);
             }
         }
     }

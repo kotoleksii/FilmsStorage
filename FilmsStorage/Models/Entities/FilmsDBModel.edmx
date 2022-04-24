@@ -4,18 +4,10 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FilmsStorageDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="FilmsStorageDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Film">
           <Key>
             <PropertyRef Name="FilmID" />
-            <PropertyRef Name="FilmName" />
-            <PropertyRef Name="ReleaseYear" />
-            <PropertyRef Name="fk_GenreID" />
-            <PropertyRef Name="fk_UserID" />
-            <PropertyRef Name="FileName" />
-            <PropertyRef Name="FilePath" />
           </Key>
           <Property Name="FilmID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FilmName" Type="nvarchar" MaxLength="500" Nullable="false" />
@@ -68,20 +60,9 @@ warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FilmsStorageDBModelStoreContainer">
+          <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Film" EntityType="Self.Film" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Film].[FilmID] AS [FilmID], 
-    [Film].[FilmName] AS [FilmName], 
-    [Film].[ReleaseYear] AS [ReleaseYear], 
-    [Film].[fk_GenreID] AS [fk_GenreID], 
-    [Film].[fk_UserID] AS [fk_UserID], 
-    [Film].[FileName] AS [FileName], 
-    [Film].[FilePath] AS [FilePath], 
-    [Film].[FilmDescription] AS [FilmDescription]
-    FROM [dbo].[Film] AS [Film]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Film_Genre" Association="Self.FK_Film_Genre">
             <End Role="Genre" EntitySet="Genre" />
             <End Role="Film" EntitySet="Film" />
@@ -91,8 +72,7 @@ warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary k
             <End Role="Film" EntitySet="Film" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FilmsStorageDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -102,7 +82,7 @@ warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary k
           </Key>
           <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GenreName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Films" Relationship="Self.FK_Film_Genre" FromRole="Genre" ToRole="Film" />
+          <NavigationProperty Name="Films" Relationship="FilmsStorageDBModel.FK_Film_Genre" FromRole="Genre" ToRole="Film" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -113,32 +93,39 @@ warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary k
           <Property Name="Login" Type="String" MaxLength="640" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="Binary" MaxLength="64" FixedLength="true" Nullable="false" />
           <Property Name="RegisteredAt" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Films" Relationship="Self.FK_Film_User" FromRole="User" ToRole="Film" />
+          <NavigationProperty Name="Films" Relationship="FilmsStorageDBModel.FK_Film_User" FromRole="User" ToRole="Film" />
         </EntityType>
+        <EntityContainer Name="FilmsStorageDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Films" EntityType="FilmsStorageDBModel.Film" />
+          <AssociationSet Name="FK_Film_Genre" Association="FilmsStorageDBModel.FK_Film_Genre">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Film_User" Association="FilmsStorageDBModel.FK_Film_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Film">
           <Key>
             <PropertyRef Name="FilmID" />
-            <PropertyRef Name="FilmName" />
-            <PropertyRef Name="ReleaseYear" />
-            <PropertyRef Name="fk_GenreID" />
-            <PropertyRef Name="fk_UserID" />
-            <PropertyRef Name="FileName" />
-            <PropertyRef Name="FilePath" />
           </Key>
           <Property Name="FilmID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FilmName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FilmName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ReleaseYear" Type="Int32" Nullable="false" />
           <Property Name="fk_GenreID" Type="Int32" Nullable="false" />
           <Property Name="fk_UserID" Type="Int32" Nullable="false" />
-          <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FilmDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Genre" Relationship="Self.FK_Film_Genre" FromRole="Film" ToRole="Genre" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Film_User" FromRole="Film" ToRole="User" />
+          <NavigationProperty Name="Genre" Relationship="FilmsStorageDBModel.FK_Film_Genre" FromRole="Film" ToRole="Genre" />
+          <NavigationProperty Name="User" Relationship="FilmsStorageDBModel.FK_Film_User" FromRole="Film" ToRole="User" />
         </EntityType>
         <Association Name="FK_Film_Genre">
-          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
-          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <End Type="FilmsStorageDBModel.Genre" Role="Genre" Multiplicity="1" />
+          <End Type="FilmsStorageDBModel.Film" Role="Film" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Genre">
               <PropertyRef Name="GenreID" />
@@ -149,8 +136,8 @@ warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Film_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <End Type="FilmsStorageDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="FilmsStorageDBModel.Film" Role="Film" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
@@ -160,19 +147,6 @@ warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FilmsStorageDB" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Genres" EntityType="Self.Genre" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Films" EntityType="Self.Film" />
-          <AssociationSet Name="FK_Film_Genre" Association="Self.FK_Film_Genre">
-            <End Role="Genre" EntitySet="Genres" />
-            <End Role="Film" EntitySet="Films" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Film_User" Association="Self.FK_Film_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Film" EntitySet="Films" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -201,14 +175,14 @@ warning 6002: The table/view 'FilmsStorageDB.dbo.Film' does not have a primary k
           <EntitySetMapping Name="Films">
             <EntityTypeMapping TypeName="FilmsStorageDBModel.Film">
               <MappingFragment StoreEntitySet="Film">
-                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
-                <ScalarProperty Name="FilmName" ColumnName="FilmName" />
-                <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
-                <ScalarProperty Name="fk_GenreID" ColumnName="fk_GenreID" />
-                <ScalarProperty Name="fk_UserID" ColumnName="fk_UserID" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
                 <ScalarProperty Name="FilmDescription" ColumnName="FilmDescription" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="fk_UserID" ColumnName="fk_UserID" />
+                <ScalarProperty Name="fk_GenreID" ColumnName="fk_GenreID" />
+                <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
+                <ScalarProperty Name="FilmName" ColumnName="FilmName" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
