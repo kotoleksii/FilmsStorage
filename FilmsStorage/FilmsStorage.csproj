@@ -246,6 +246,8 @@
     <Content Include="Views\Shared\SocialLinks.cshtml" />
     <Content Include="Views\Files\Add.cshtml" />
     <Content Include="Views\Shared\FilmsByUser.cshtml" />
+    <Content Include="Views\Files\Details.cshtml" />
+    <Content Include="Views\Files\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

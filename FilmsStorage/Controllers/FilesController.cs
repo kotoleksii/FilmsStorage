@@ -72,9 +72,21 @@ namespace FilmsStorage.Controllers
 
         public RedirectToRouteResult Delete(int id)
         {
-            int numberOfDeletedFiles =_DAL.Films.Delete(id);
+            //TODO: Check if file belongs to current user
+            //Potential approach - to use action filter
 
-            if(numberOfDeletedFiles == 0)
+            Film deletedFilm =_DAL.Films.Delete(id);
+
+            if(deletedFilm != null)
+            {
+                bool isFlmDeleted = _SL.Files.DeleteFilm(deletedFilm);
+
+                if (!isFlmDeleted)
+                {
+                    TempData["Error"] = "Error deliting Film file from file system";
+                }
+            }
+            else
             {
                 TempData["Error"] = "No such file to delete";
             }
@@ -82,9 +94,60 @@ namespace FilmsStorage.Controllers
             return RedirectToAction("Index", "Account"); 
         }
 
-        public ViewResult Details(int id)
+        public ActionResult Edit(int id)
         {
+            //TODO: Check if file belongs to current user
 
+            var filmByID = _DAL.Films.FilmByID(id);
+
+            if (filmByID != null)
+            {
+                ViewData["Genres"] = _DAL.Genres.All();
+
+                return View(filmByID);
+            }
+            else
+            {
+                TempData["Error"] = "No such film";
+
+                return RedirectToAction("Index", "Account");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Film updatedFilm)
+        {
+            //TODO: Protect from form manual edition
+
+            if (ModelState.IsValid)
+            {
+                //TODO: Завершити реалізацію методу Edit
+                //Подумати на тим як можна захистити проєкт від "угону" чужих файлів
+
+                return RedirectToAction("Index", "Account");
+            }
+            else
+            {
+                return View(updatedFilm);
+            }
+        }
+
+        public ActionResult Details(int id)
+        {
+            //TODO: Check if file belongs to current user
+
+            var filmByID = _DAL.Films.ByID(id);
+
+            if(filmByID != null)
+            {
+                return View(filmByID);
+            }
+            else
+            {
+                TempData["Error"] = "No such film";
+
+                return RedirectToAction("Index", "Account");
+            }
         }
     }
 }

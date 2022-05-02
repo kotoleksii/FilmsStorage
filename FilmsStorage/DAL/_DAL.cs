@@ -58,9 +58,9 @@ namespace FilmsStorage.DAL
                 }
             }
 
-            public static int Delete(int filmID)
+            public static Film Delete(int filmID)
             {
-                int countOfDeletedFiles = 0;
+                Film deletedFile = null;
 
                 using (var db = new FilmsStorageDB())
                 {
@@ -70,12 +70,12 @@ namespace FilmsStorage.DAL
                     {
                         Film filmToDelete = searchResult.First();
 
-                        db.Films.Remove(filmToDelete);
-                        countOfDeletedFiles = db.SaveChanges();
+                        deletedFile = db.Films.Remove(filmToDelete);
+                        db.SaveChanges();
                     }
                 }
 
-                return countOfDeletedFiles;
+                return deletedFile;
             }
 
             public static List<v_Films> ByUser(int userID)
@@ -92,6 +92,38 @@ namespace FilmsStorage.DAL
                     }
                 }
                 return userFilms;
+            }
+
+            public static Film FilmByID(int filmID)
+            {
+                Film filmByID = null;
+
+                using (var db = new FilmsStorageDB())
+                {
+                    var searchResults = db.Films.Where(f => f.FilmID == filmID);
+
+                    if (searchResults.Any())
+                    {
+                        filmByID = searchResults.First();
+                    }
+                }
+                return filmByID;
+            }
+
+            public static v_Films ByID(int filmID)
+            {
+                v_Films filmByID = null;
+
+                using (var db = new FilmsStorageDB())
+                {
+                    var searchResults = db.v_Films.Where(f => f.FilmID == filmID);
+
+                    if (searchResults.Any())
+                    {
+                        filmByID = searchResults.First();
+                    }
+                }
+                return filmByID;
             }
         }
 

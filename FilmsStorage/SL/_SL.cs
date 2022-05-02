@@ -89,6 +89,28 @@ namespace FilmsStorage.SL
 
         public static class Files
         {
+            public static bool DeleteFilm(Film filmToDelete)
+            {
+                bool fileDeleteResult = false;
+
+                string fileFullPath = Path.Combine(filmToDelete.FilePath, filmToDelete.FileName);
+
+                if (File.Exists(fileFullPath))
+                {
+                    try
+                    {
+                        //TODO: Resolve access not authorized Exception;
+                        //
+                        File.Delete(filmToDelete.FilePath);
+
+                        fileDeleteResult = true;
+                    }
+                    catch 
+                    {}
+                }
+                return fileDeleteResult;
+            }
+
             public static FileSaveResult SaveFilm(HttpPostedFileBase postedFile, int uploadedByUser)
             {
                 FileSaveResult fileUploadResult = new FileSaveResult();
