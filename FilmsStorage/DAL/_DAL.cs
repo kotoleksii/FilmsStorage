@@ -57,6 +57,42 @@ namespace FilmsStorage.DAL
                     return filmToAdd;
                 }
             }
+
+            public static int Delete(int filmID)
+            {
+                int countOfDeletedFiles = 0;
+
+                using (var db = new FilmsStorageDB())
+                {
+                    var searchResult = db.Films.Where(f => f.FilmID == filmID);
+
+                    if (searchResult.Any())
+                    {
+                        Film filmToDelete = searchResult.First();
+
+                        db.Films.Remove(filmToDelete);
+                        countOfDeletedFiles = db.SaveChanges();
+                    }
+                }
+
+                return countOfDeletedFiles;
+            }
+
+            public static List<v_Films> ByUser(int userID)
+            {
+                List<v_Films> userFilms = new List<v_Films>();
+
+                using (var db = new FilmsStorageDB())
+                {
+                    var searchResults = db.v_Films.Where(f => f.UserID == userID);
+
+                    if (searchResults.Any())
+                    {
+                        userFilms = searchResults.ToList();
+                    }
+                }
+                return userFilms;
+            }
         }
 
         public static class Genres

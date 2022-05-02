@@ -28,5 +28,6 @@ namespace FilmsStorage.Models.Entities
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Film> Films { get; set; }
+        public virtual DbSet<v_Films> v_Films { get; set; }
     }
 }

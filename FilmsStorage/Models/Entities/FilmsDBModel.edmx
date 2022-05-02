@@ -35,6 +35,28 @@
           <Property Name="Password" Type="binary" MaxLength="64" Nullable="false" />
           <Property Name="RegisteredAt" Type="datetime" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FilmsStorageDB.dbo.v_Films' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_Films">
+          <Key>
+            <PropertyRef Name="FilmID" />
+            <PropertyRef Name="FilmName" />
+            <PropertyRef Name="FileName" />
+            <PropertyRef Name="FilePath" />
+            <PropertyRef Name="ReleaseYear" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="FilmID" Type="bigint" Nullable="false" />
+          <Property Name="FilmName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FilmDescription" Type="ntext" />
+          <Property Name="ReleaseYear" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+          <Property Name="GenreName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <Association Name="FK_Film_Genre">
           <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
           <End Role="Film" Type="Self.Film" Multiplicity="*" />
@@ -63,6 +85,19 @@
           <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_Films" EntityType="Self.v_Films" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Films].[FilmID] AS [FilmID], 
+    [v_Films].[FilmName] AS [FilmName], 
+    [v_Films].[FileName] AS [FileName], 
+    [v_Films].[FilePath] AS [FilePath], 
+    [v_Films].[FilmDescription] AS [FilmDescription], 
+    [v_Films].[ReleaseYear] AS [ReleaseYear], 
+    [v_Films].[UserID] AS [UserID], 
+    [v_Films].[GenreID] AS [GenreID], 
+    [v_Films].[GenreName] AS [GenreName]
+    FROM [dbo].[v_Films] AS [v_Films]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Film_Genre" Association="Self.FK_Film_Genre">
             <End Role="Genre" EntitySet="Genre" />
             <End Role="Film" EntitySet="Film" />
@@ -107,6 +142,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Film" EntitySet="Films" />
           </AssociationSet>
+          <EntitySet Name="v_Films" EntityType="FilmsStorageDBModel.v_Films" />
           </EntityContainer>
         <EntityType Name="Film">
           <Key>
@@ -147,6 +183,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="v_Films">
+          <Key>
+            <PropertyRef Name="FilmID" />
+            <PropertyRef Name="FilmName" />
+            <PropertyRef Name="FileName" />
+            <PropertyRef Name="FilePath" />
+            <PropertyRef Name="ReleaseYear" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="FilmID" Type="Int64" Nullable="false" />
+          <Property Name="FilmName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilmDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReleaseYear" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="GenreID" Type="Int32" Nullable="false" />
+          <Property Name="GenreName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -181,6 +237,21 @@
                 <ScalarProperty Name="fk_UserID" ColumnName="fk_UserID" />
                 <ScalarProperty Name="fk_GenreID" ColumnName="fk_GenreID" />
                 <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
+                <ScalarProperty Name="FilmName" ColumnName="FilmName" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Films">
+            <EntityTypeMapping TypeName="FilmsStorageDBModel.v_Films">
+              <MappingFragment StoreEntitySet="v_Films">
+                <ScalarProperty Name="GenreName" ColumnName="GenreName" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
+                <ScalarProperty Name="FilmDescription" ColumnName="FilmDescription" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="FilmName" ColumnName="FilmName" />
                 <ScalarProperty Name="FilmID" ColumnName="FilmID" />
               </MappingFragment>

@@ -4,6 +4,7 @@ using FilmsStorage.Models;
 using FilmsStorage.Models.Entities;
 using FilmsStorage.SL;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -17,11 +18,10 @@ namespace FilmsStorage.Controllers
         // TODO: Замінити штатний фільтр на свій
         public ViewResult Index()
         {
-            string userLoginName = User.Identity.Name;
+            if (TempData["Error"] != null)
+                ViewBag.ErrorMsg = TempData["Error"].ToString();
 
-            User userDetails = _DAL.Users.ByLogin(userLoginName);
-
-            return View(userDetails);
+            return View();
         }
 
         #region Login

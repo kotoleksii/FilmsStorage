@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FilmsStorage.Models.Entities.v_Films>
+
+<p>
+    @Html.ActionLink("Upload New", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FilmName)
+        </th>   
+        <th>
+            @Html.DisplayNameFor(model => model.FilmDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>      
+        <td>
+            @Html.DisplayFor(modelItem => item.FilmName)
+        </td>     
+        <td>
+            @Html.DisplayFor(modelItem => item.FilmDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GenreName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit Film", "Edit", "Files", new { id=item.FilmID }, new {@class ="btn btn-warning"}) |
+            @Html.ActionLink("Film Details", "Details", "Files", new { id = item.FilmID }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Delete Film", "Delete", "Files", new { id = item.FilmID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

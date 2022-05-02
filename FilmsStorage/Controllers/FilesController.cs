@@ -3,6 +3,7 @@ using FilmsStorage.Models;
 using FilmsStorage.Models.Entities;
 using FilmsStorage.SL;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace FilmsStorage.Controllers
@@ -11,11 +12,12 @@ namespace FilmsStorage.Controllers
     public class FilesController : BaseController
     {
         // GET: Files By User
-        public PartialViewResult ByUser()
+        public PartialViewResult FilmsByUser()
         {
             //TODO: Get Files Of Given User
+            List<v_Films> userFilms = _DAL.Films.ByUser(CurrentUser.UserID);
 
-            return PartialView();
+            return PartialView(userFilms);
         }
 
         //Show add file form
@@ -66,6 +68,23 @@ namespace FilmsStorage.Controllers
 
                 return View(addFilmModel);
             }
+        }
+
+        public RedirectToRouteResult Delete(int id)
+        {
+            int numberOfDeletedFiles =_DAL.Films.Delete(id);
+
+            if(numberOfDeletedFiles == 0)
+            {
+                TempData["Error"] = "No such file to delete";
+            }
+
+            return RedirectToAction("Index", "Account"); 
+        }
+
+        public ViewResult Details(int id)
+        {
+
         }
     }
 }

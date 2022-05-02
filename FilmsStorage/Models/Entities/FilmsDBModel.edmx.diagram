@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="FilmsStorageDBModel.Film" Width="1.5" PointX="3" PointY="3.125" />
         <AssociationConnector Association="FilmsStorageDBModel.FK_Film_Genre" />
         <AssociationConnector Association="FilmsStorageDBModel.FK_Film_User" />
+        <EntityTypeShape EntityType="FilmsStorageDBModel.v_Films" Width="1.5" PointX="5.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
