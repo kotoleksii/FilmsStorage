@@ -37,7 +37,7 @@
         <td>
             @Html.ActionLink("Edit Film", "Edit", "Files", new { id=item.FilmID }, new {@class ="btn btn-warning"}) |
             @Html.ActionLink("Film Details", "Details", "Files", new { id = item.FilmID }, new { @class = "btn btn-info" }) |
-            @Html.ActionLink("Delete Film", "Delete", "Files", new { id = item.FilmID }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Delete Film", "Delete", "Files", new { fileID = item.FilmID, userID = item.UserID}, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

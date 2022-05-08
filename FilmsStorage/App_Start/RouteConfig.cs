@@ -13,6 +13,27 @@ namespace FilmsStorage
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //Для роботи маршрутів на рівні контролерів та екшенів
+            routes.MapMvcAttributeRoutes();
+
+            routes.MapRoute(
+                name: "Shortcut",
+                "Test",
+                defaults: new {controller= "Home", action = "Test"}
+                );
+
+            routes.MapRoute(
+                name: "ShowError",
+                "Home/Error",
+                defaults: new {controller = "Home", action = "Error"}
+                );
+
+            routes.MapRoute(
+                name: "Files",
+                url: "Files/{action}/File/{fileID}/User/{userID}",
+                defaults: new { controller = "Files", fileID = UrlParameter.Optional, userID = UrlParameter.Optional}
+                );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

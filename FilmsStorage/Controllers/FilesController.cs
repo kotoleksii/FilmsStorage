@@ -1,9 +1,11 @@
 ﻿using FilmsStorage.DAL;
+using FilmsStorage.Filters;
 using FilmsStorage.Models;
 using FilmsStorage.Models.Entities;
 using FilmsStorage.SL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Web.Mvc;
 
 namespace FilmsStorage.Controllers
@@ -32,6 +34,7 @@ namespace FilmsStorage.Controllers
         }
 
         [HttpPost]
+        [LogIt("File added")]
         public ActionResult Add(FilmAddModel addFilmModel)
         {
             if (Request.Files[0].ContentLength > 0)
@@ -70,12 +73,12 @@ namespace FilmsStorage.Controllers
             }
         }
 
-        public RedirectToRouteResult Delete(int id)
+        public RedirectToRouteResult Delete(int fileID, int userID)
         {
             //TODO: Check if file belongs to current user
             //Potential approach - to use action filter
 
-            Film deletedFilm =_DAL.Films.Delete(id);
+            Film deletedFilm =_DAL.Films.Delete(fileID);
 
             if(deletedFilm != null)
             {
@@ -94,6 +97,7 @@ namespace FilmsStorage.Controllers
             return RedirectToAction("Index", "Account"); 
         }
 
+        [LogIt("Show file edit view")]
         public ActionResult Edit(int id)
         {
             //TODO: Check if file belongs to current user
@@ -115,7 +119,8 @@ namespace FilmsStorage.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Film updatedFilm)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "fk_UserID")] Film updatedFilm)
         {
             //TODO: Protect from form manual edition
 

@@ -5,7 +5,7 @@ namespace FilmsStorage.Controllers
 {
     public class BaseController : Controller
     {
-        protected new CustomPrincipal CurrentUser
+        protected CustomPrincipal CurrentUser
         {
             get { return HttpContext.User as CustomPrincipal; }
         }

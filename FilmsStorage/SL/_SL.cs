@@ -7,7 +7,6 @@ using System.Configuration;
 using System;
 using System.Web.Security;
 using System.Web;
-using System.Configuration;
 using System.IO;
 
 namespace FilmsStorage.SL

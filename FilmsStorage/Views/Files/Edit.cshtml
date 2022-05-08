@@ -23,6 +23,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.FilmID)
+        @Html.HiddenFor(model => model.fk_UserID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.FilmName, htmlAttributes: new { @class = "control-label col-md-2" })

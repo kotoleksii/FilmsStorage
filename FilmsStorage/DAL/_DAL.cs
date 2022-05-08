@@ -6,6 +6,7 @@ using System.Web;
 using FilmsStorage.Models.Entities;
 using FilmsStorage.Models;
 using FilmsStorage.Mappers;
+using System.Data.Entity;
 
 namespace FilmsStorage.DAL
 {
