@@ -129,10 +129,22 @@ namespace FilmsStorage.Controllers
                 //TODO: Завершити реалізацію методу Edit
                 //Подумати на тим як можна захистити проєкт від "угону" чужих файлів
 
+                //TODO: подумати ще над реалізацією
+                //var userID = updatedFilm.fk_UserID;
+                //var films = _DAL.Films.ByUser(userID);
+
+                //films[0].UserID = updatedFilm.fk_UserID;
+                //updatedFilm.FilmID = films[0].FilmID;
+                //updatedFilm.FilmName = films[0].FilmName;
+
                 return RedirectToAction("Index", "Account");
             }
             else
             {
+                ViewBag.ErrorMsg = "No file posted";
+
+                ViewData["Genres"] = _DAL.Genres.All();
+
                 return View(updatedFilm);
             }
         }
