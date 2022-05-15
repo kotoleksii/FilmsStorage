@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using FilmsStorage.Filters;
 using FilmsStorage.Models.Login;
 using FilmsStorage.Models.Serialization;
 
@@ -18,6 +19,7 @@ namespace FilmsStorage
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
 
         //TODO: Find event fires only if auth does exist

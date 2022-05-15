@@ -7,7 +7,7 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FilmName)
-        </th>   
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FilmDescription)
         </th>
@@ -20,26 +20,79 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>      
-        <td>
-            @Html.DisplayFor(modelItem => item.FilmName)
-        </td>     
-        <td>
-            @Html.DisplayFor(modelItem => item.FilmDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReleaseYear)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GenreName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit Film", "Edit", "Files", new { id=item.FilmID }, new {@class ="btn btn-warning"}) |
-            @Html.ActionLink("Film Details", "Details", "Files", new { id = item.FilmID }, new { @class = "btn btn-info" }) |
-            @Html.ActionLink("Delete Film", "Delete", "Files", new { fileID = item.FilmID, userID = item.UserID}, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilmDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit Film", "Edit", "Files", new { id = item.FilmID }, new { @class = "btn btn-warning" }) |
+                <button data-filmId="@item.FilmID" class="btn btn-info filmDetailsBtn">Details</button> |
+                @Html.ActionLink("Delete Film", "Delete", "Files", new { fileID = item.FilmID, userID = item.UserID }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div class="modal" id="filmDetailsPopUp" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="detailsFilmNameTxt">Film Name: </label>
+                <input type="text" id="detailsFilmNameTxt" class="form-control" />
+
+                <label for="detailsFileNameTxt">File Name: </label>
+                <input type="text" id="detailsFileNameTxt" class="form-control" />
+
+                <label for="detailsFilePathTxt">File Path: </label>
+                <input type="text" id="detailsFilePathTxt" class="form-control" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    const filmDetailPopUp = new bootstrap.Modal('#filmDetailsPopUp');
+
+    $('.filmDetailsBtn').click(function () {
+
+        const filmID = this.dataset.filmid;
+
+        $.get(
+            "/files/Details4Js",
+            { fileID: filmID }
+        ).done(function (data) {
+            if (data) {
+
+                $('#detailsFilmNameTxt').val(data.FilmName);
+                $('#detailsFileNameTxt').val(data.FileName);
+                $('#detailsFilePathTxt').val(data.FilePath);
+
+                filmDetailPopUp.show();
+            }
+        }).fail(function (error) {
+            console.log(error.responseText)
+        });
+    });   
+
+</script>

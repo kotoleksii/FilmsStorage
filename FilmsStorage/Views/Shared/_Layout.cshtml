@@ -31,6 +31,8 @@
         </div>
     </nav>
 
+    @Scripts.Render("~/bundles/js")
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -39,6 +41,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/js")
+    @RenderSection("customScripts", required: false)
 </body>
 </html>

@@ -117,6 +117,10 @@ namespace FilmsStorage.DAL
 
                 using (var db = new FilmsStorageDB())
                 {
+                    //Turn LazyLoading off to allow JSON serialization
+                    //DB Record will be returned immediately
+                    db.Configuration.LazyLoadingEnabled = false;
+
                     var searchResults = db.v_Films.Where(f => f.FilmID == filmID);
 
                     if (searchResults.Any())

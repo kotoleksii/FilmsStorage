@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using FilmsStorage.Validators;
 
 namespace FilmsStorage.Models
 {
@@ -15,6 +16,7 @@ namespace FilmsStorage.Models
         public string LoginName { get; set; }
 
         [Required]
+        [AuditPassword(MinimumLength = 10, RequireUpperLowerMix = true, ErrorMessage = "pass is too short")]
         public string Password { get; set; }
 
         [Required]

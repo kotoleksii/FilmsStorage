@@ -21,6 +21,7 @@ namespace FilmsStorage
                     new ScriptBundle("~/bundles/js")
                 .Include("~/Scripts/jquery-3.6.0.min.js")
                 .Include("~/Scripts/bootstrap.min.js")
+                .Include("~/Scripts/popper.min.js")
             );
 
             BundleTable.EnableOptimizations = true;

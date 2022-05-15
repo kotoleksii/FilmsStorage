@@ -166,5 +166,13 @@ namespace FilmsStorage.Controllers
                 return RedirectToAction("Index", "Account");
             }
         }
+
+        public JsonResult Details4Js(int fileID)
+        {
+            var filmByID = _DAL.Films.ByID(fileID);
+
+            //Note: don't use JsonRequestBehavior.AllowGet at prod!
+            return Json(filmByID, JsonRequestBehavior.AllowGet);
+        }
     }
 }

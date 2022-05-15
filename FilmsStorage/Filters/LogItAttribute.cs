@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc.Filters;
+﻿using System.Diagnostics;
 using System.Web.Mvc;
-using System.Diagnostics;
+using System.Web.Routing;
 
 namespace FilmsStorage.Filters
 {
     public class LogItAttribute : FilterAttribute, IActionFilter
     {
         private string stringToLog;
+
+        public LogItAttribute()
+        {
+
+        }
+
         public LogItAttribute(string stringToLog)
         {
             this.stringToLog = stringToLog;
@@ -23,6 +26,9 @@ namespace FilmsStorage.Filters
         //Before method runs
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            RouteValueDictionary routeInformation = filterContext.RouteData.Values;
+
+            Debug.WriteLine($"Method {routeInformation["controller"]}/{routeInformation["action"]} started");
         }
     }
 }
