@@ -120,24 +120,26 @@ namespace FilmsStorage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "fk_UserID")] Film updatedFilm)
+        public ActionResult Edit(Film updatedFilm)
         {
             //TODO: Protect from form manual edition
 
             if (ModelState.IsValid)
             {
-                //TODO: Завершити реалізацію методу Edit
-                //Подумати на тим як можна захистити проєкт від "угону" чужих файлів
+                v_Films filmByID = _DAL.Films.ByID((int)updatedFilm.FilmID);
 
-                //TODO: подумати ще над реалізацією
-                //var userID = updatedFilm.fk_UserID;
-                //var films = _DAL.Films.ByUser(userID);
+                if (filmByID.UserID == CurrentUser.UserID)
+                {
+                    updatedFilm.fk_UserID = CurrentUser.UserID;
 
-                //films[0].UserID = updatedFilm.fk_UserID;
-                //updatedFilm.FilmID = films[0].FilmID;
-                //updatedFilm.FilmName = films[0].FilmName;
+                    _DAL.Films.Edit(updatedFilm);
 
-                return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "Account");
+                }
+
+                TempData["Error"] = "Not successful";
+
+                return View(updatedFilm);
             }
             else
             {

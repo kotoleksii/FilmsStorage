@@ -59,6 +59,34 @@ namespace FilmsStorage.DAL
                 }
             }
 
+            public static Film Edit(Film updatedFilm)
+            {
+                Film filmByID = null;
+
+                using (var db = new FilmsStorageDB())
+                {
+                    var searchResults = db.Films.Where(f => f.FilmID == updatedFilm.FilmID);
+
+                    if (searchResults.Any())
+                    {
+                        filmByID = searchResults.First();
+
+                        filmByID.FilmName = updatedFilm.FilmName;
+                        filmByID.ReleaseYear = updatedFilm.ReleaseYear;
+                        filmByID.fk_GenreID = updatedFilm.fk_GenreID;
+                        filmByID.fk_UserID = updatedFilm.fk_UserID;
+                        filmByID.FileName = updatedFilm.FileName;
+                        filmByID.FilePath = updatedFilm.FilePath;
+                        filmByID.FilmDescription = updatedFilm.FilmDescription;
+
+                        db.SaveChanges();
+                    }
+
+                    return updatedFilm;
+                }
+            }
+
+
             public static Film Delete(int filmID)
             {
                 Film deletedFile = null;
