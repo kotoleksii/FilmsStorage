@@ -61,7 +61,7 @@ namespace FilmsStorage.DAL
 
             public static Film Edit(Film updatedFilm)
             {
-                Film filmByID = null;
+                Film editedFile = null;
 
                 using (var db = new FilmsStorageDB())
                 {
@@ -69,15 +69,15 @@ namespace FilmsStorage.DAL
 
                     if (searchResults.Any())
                     {
-                        filmByID = searchResults.First();
+                        editedFile = searchResults.First();
 
-                        filmByID.FilmName = updatedFilm.FilmName;
-                        filmByID.ReleaseYear = updatedFilm.ReleaseYear;
-                        filmByID.fk_GenreID = updatedFilm.fk_GenreID;
-                        filmByID.fk_UserID = updatedFilm.fk_UserID;
-                        filmByID.FileName = updatedFilm.FileName;
-                        filmByID.FilePath = updatedFilm.FilePath;
-                        filmByID.FilmDescription = updatedFilm.FilmDescription;
+                        editedFile.FilmName = updatedFilm.FilmName;
+                        editedFile.ReleaseYear = updatedFilm.ReleaseYear;
+                        editedFile.fk_GenreID = updatedFilm.fk_GenreID;
+                        editedFile.fk_UserID = updatedFilm.fk_UserID;
+                        editedFile.FileName = updatedFilm.FileName;
+                        editedFile.FilePath = updatedFilm.FilePath;
+                        editedFile.FilmDescription = updatedFilm.FilmDescription;
 
                         db.SaveChanges();
                     }
