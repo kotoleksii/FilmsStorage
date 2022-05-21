@@ -16,7 +16,7 @@ namespace FilmsStorage.Models
         public string LoginName { get; set; }
 
         [Required]
-        [AuditPassword(MinimumLength = 10, RequireUpperLowerMix = true, ErrorMessage = "pass is too short")]
+        [AuditPassword(MinimumLength = 10, RequireUpperLowerMix = true, RequireSpecialCharacters = true, SpecialCharactersCount = 3)]
         public string Password { get; set; }
 
         [Required]
