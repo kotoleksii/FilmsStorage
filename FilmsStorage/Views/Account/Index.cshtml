@@ -10,12 +10,10 @@
     <p>@FilmsStorage.Resources.Views.Account.Index.Hello <b>@HttpContext.Current.User.Identity.Name</b>!</p>
 </div>
 
-<h3>@FilmsStorage.Resources.Views.Account.Index.YourFiles </h3>
+<h3>@FilmsStorage.Resources.Views.Account.Index.YourFiles</h3>
 
 @{ Html.RenderPartial("ShowError");}
 
 @{ Html.RenderAction("FilmsByUser", "Files");}
 
 @{ Html.RenderPartial("SocialLinks");}
-
-

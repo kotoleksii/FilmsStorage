@@ -1,7 +1,7 @@
 ﻿@model FilmsStorage.Models.FilmAddModel
 
 @{
-    ViewBag.Title = "Upload Movie";
+    ViewBag.Title = FilmsStorage.Resources.Files.Add.UploadTitle;
 
     var genresSelectedListItems = new List<SelectListItem>();
 
@@ -12,64 +12,75 @@
 
 }
 
-<h2>Upload Movie</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+            <h2>@FilmsStorage.Resources.Files.Add.UploadTitle</h2>
 
-@using (Html.BeginForm(
-    actionName: "Add",
-    controllerName: "Files",
-    method: FormMethod.Post,
-    htmlAttributes: new {enctype = "multipart/form-data"}
-    )) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FilmName, labelText: "Film Name: ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FilmName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FilmName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            @using (Html.BeginForm(
+                actionName: "Add",
+                controllerName: "Files",
+                method: FormMethod.Post,
+                htmlAttributes: new { enctype = "multipart/form-data" }
+                ))
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ReleaseYear, labelText: "Release Year: " ,htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ReleaseYear, new { htmlAttributes = new { @class = "form-control", min = "1895", max=DateTime.Now.Year.ToString() } })
-                @Html.ValidationMessageFor(model => model.ReleaseYear, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.FilmName, labelText: FilmsStorage.Resources.Files.Add.FilmName, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FilmName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FilmName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.GenreID, labelText: "Genre" ,htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.GenreID, genresSelectedListItems, new { @class = "form-select" } )
-                @Html.ValidationMessageFor(model => model.GenreID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.ReleaseYear, labelText: FilmsStorage.Resources.Files.Add.ReleaseYear, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ReleaseYear, new { htmlAttributes = new { @class = "form-control", min = "1895", max = DateTime.Now.Year.ToString() } })
+                            @Html.ValidationMessageFor(model => model.ReleaseYear, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FileName,labelText: "Choose File:" ,htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-               <input type="file" name="film" class="form-control"/>
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.GenreID, labelText: FilmsStorage.Resources.Files.Add.Genre, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.GenreID, genresSelectedListItems, new { @class = "form-select" })
+                            @Html.ValidationMessageFor(model => model.GenreID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FilmDescription, labelText: "Description" ,htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.FilmDescription, htmlAttributes: new { @class = "form-control col-md-10", cols="50", rows="4" } )
-                @Html.ValidationMessageFor(model => model.FilmDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.FileName, labelText: FilmsStorage.Resources.Files.Add.ChooseFile, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            <input type="file" name="film" class="form-control" />
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 mt-2">
-                <input type="submit" value="Upload Film" class="btn btn-success" />
-            </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.FilmDescription, labelText: FilmsStorage.Resources.Files.Add.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.FilmDescription, htmlAttributes: new { @class = "form-control col-md-10", cols = "50", rows = "4" })
+                            @Html.ValidationMessageFor(model => model.FilmDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" align="center">
+                        <div class="col-md-offset-2 col-md-10 mt-2">
+                            <input type="submit" value="@FilmsStorage.Resources.Files.Add.UploadBtn" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+            @{Html.RenderPartial("ShowError");}
+
         </div>
     </div>
-}
-
-@{Html.RenderPartial("ShowError");}
+</div>
+<div>
+    @Html.ActionLink(FilmsStorage.Resources.Files.Add.Back, "Index", "Account")
+</div>

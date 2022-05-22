@@ -117,22 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApplicationName" xml:space="preserve">
-    <value>Сховище фільмів</value>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
   </data>
-  <data name="NavHome" xml:space="preserve">
-    <value>Головна</value>
+  <data name="LoginName" xml:space="preserve">
+    <value>Login Name</value>
   </data>
-  <data name="NavLogin" xml:space="preserve">
-    <value>Увійти</value>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Login Form</value>
   </data>
-  <data name="NavLogout" xml:space="preserve">
-    <value>Вийти</value>
-  </data>
-  <data name="NavMyProfile" xml:space="preserve">
-    <value>Мій кабінет</value>
-  </data>
-  <data name="NavRegister" xml:space="preserve">
-    <value>Реєстрація</value>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
   </data>
 </root>

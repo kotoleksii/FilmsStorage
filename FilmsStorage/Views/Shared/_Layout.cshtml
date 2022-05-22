@@ -18,7 +18,6 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavMyProfile, "Index", "Account", null, new { @class = "btn btn-info" }) </li>
-                        <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavUpload, "Add", "Files", null, new { @class = "btn btn-warning" }) </li>
                         <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavLogout, "Logout", "Account", null, new { @class = "btn btn-danger" }) </li>
                     }
                     else
@@ -27,6 +26,10 @@
                         <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavLogin, "Login", "Account", null, new { @class = "btn btn-success" }) </li>
                     }
                 </ul>
+                <select class="form-select w-auto mb-2">
+                    <option value="en">EN</option>
+                    <option value="uk">UK</option>
+                </select>
             </div>
         </div>
     </nav>

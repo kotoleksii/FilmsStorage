@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FilmsStorage.Resources.Views.Account {
+namespace FilmsStorage.Resources.Views.Home {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace FilmsStorage.Resources.Views.Account {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FilmsStorage.Resources.Views.Account.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FilmsStorage.Resources.Views.Home.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,11 @@ namespace FilmsStorage.Resources.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello.
+        ///   Looks up a localized string similar to Index.
         /// </summary>
-        public static string Hello {
+        public static string Title {
             get {
-                return ResourceManager.GetString("Hello", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to My Profile.
-        /// </summary>
-        public static string PageTitle {
-            get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your Files.
-        /// </summary>
-        public static string YourFiles {
-            get {
-                return ResourceManager.GetString("YourFiles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your Profile.
-        /// </summary>
-        public static string YourProfile {
-            get {
-                return ResourceManager.GetString("YourProfile", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

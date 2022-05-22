@@ -1,7 +1,7 @@
 ﻿@model FilmsStorage.Models.Entities.Film
 @using FilmsStorage.Models.Entities
 
-@{ ViewBag.Title = "Edit";
+@{ ViewBag.Title = FilmsStorage.Resources.Files.Edit.EditTitle;
 
     var genresSelectListItems = new List<SelectListItem>();
 
@@ -13,74 +13,78 @@
     } 
 }
 
-<h2>Edit</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+            <h2>@FilmsStorage.Resources.Files.Edit.EditTitle</h2>
 
-@using (Html.BeginForm())
-{
-@Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <h4>Film</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.FilmID)
-        @Html.HiddenFor(model => model.fk_UserID)
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.FilmID)
+                    @Html.HiddenFor(model => model.fk_UserID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FilmName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FilmName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FilmName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.FilmName, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FilmName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FilmName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ReleaseYear, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ReleaseYear, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReleaseYear, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.ReleaseYear, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ReleaseYear, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReleaseYear, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.fk_GenreID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.fk_GenreID, genresSelectListItems)
-                @Html.ValidationMessageFor(model => model.fk_GenreID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.fk_GenreID, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.fk_GenreID, genresSelectListItems, new { @class = "form-select" })
+                            @Html.ValidationMessageFor(model => model.fk_GenreID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.FileName, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.FileName, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.FilePath, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.FilePath, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.FilePath, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.FilePath, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.FilePath, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FilmDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.FilmDescription, htmlAttributes: new { @class = "form-control", cols = "50", rows = "4" })
-                @Html.ValidationMessageFor(model => model.FilmDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group" align="center">
+                        @Html.LabelFor(model => model.FilmDescription, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.FilmDescription, htmlAttributes: new { @class = "form-control", cols = "50", rows = "4" })
+                            @Html.ValidationMessageFor(model => model.FilmDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-success" />
+                    <div class="form-group" align="center">
+                        <div class="col-md-offset-2 col-md-10 pt-2">
+                            <input type="submit" value="@FilmsStorage.Resources.Files.Edit.EditBtn" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>}
             </div>
         </div>
     </div>
-    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index", "Account")
-</div>
+    <div>
+        @Html.ActionLink(FilmsStorage.Resources.Files.Edit.Back, "Index", "Account")
+    </div>

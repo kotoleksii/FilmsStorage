@@ -22,14 +22,14 @@ namespace FilmsStorage.Resources.Views.Account {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class Login {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal Login() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FilmsStorage.Resources.Views.Account {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FilmsStorage.Resources.Views.Account.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FilmsStorage.Resources.Views.Account.Login", typeof(Login).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -59,40 +59,39 @@ namespace FilmsStorage.Resources.Views.Account {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
-        ///   Looks up a localized string similar to Hello.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
-        public static string Hello {
+        public static string GetLogin()
+        {
+            return ResourceManager.GetString("Login", resourceCulture);
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Login Name.
+        /// </summary>
+        public static string LoginName {
             get {
-                return ResourceManager.GetString("Hello", resourceCulture);
+                return ResourceManager.GetString("LoginName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Profile.
+        ///   Looks up a localized string similar to Login Form.
         /// </summary>
-        public static string PageTitle {
+        public static string LoginTitle {
             get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
+                return ResourceManager.GetString("LoginTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Files.
+        ///   Looks up a localized string similar to Password.
         /// </summary>
-        public static string YourFiles {
+        public static string Password {
             get {
-                return ResourceManager.GetString("YourFiles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your Profile.
-        /// </summary>
-        public static string YourProfile {
-            get {
-                return ResourceManager.GetString("YourProfile", resourceCulture);
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
     }

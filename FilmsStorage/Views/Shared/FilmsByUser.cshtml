@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FilmsStorage.Models.Entities.v_Films>
 
 <p>
-    @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.UploadNew, "Add")
+    @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.UploadNew, "Add", "Files", null, new { @class = "btn btn-warning" })
 </p>
 <table class="table">
     <tr>
@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.GenreName)
             </td>
             <td>
-                @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.EditFilm, "Edit", "Files", new { id = item.FilmID }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.EditFilm, "Edit", "Files", new { id = item.FilmID }, new { @class = "btn btn-success" }) |
                 <button data-filmId="@item.FilmID" class="btn btn-info filmDetailsBtn">@FilmsStorage.Resources.Views.Account.FilmsByUser.Details</button> |
                 @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.DeleteFilm, "Delete", "Files", new { fileID = item.FilmID, userID = item.UserID }, new { @class = "btn btn-danger" })
             </td>
@@ -79,7 +79,7 @@
         const filmID = this.dataset.filmid;
 
         $.get(
-            "/files/Details4Js",
+            "/uk/files/Details4Js",
             { fileID: filmID }
         ).done(function (data) {
             if (data) {

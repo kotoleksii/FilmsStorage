@@ -135,7 +135,4 @@
   <data name="NavRegister" xml:space="preserve">
     <value>Register</value>
   </data>
-  <data name="NavUpload" xml:space="preserve">
-    <value>Upload</value>
-  </data>
 </root>

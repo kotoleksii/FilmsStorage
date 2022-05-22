@@ -31,7 +31,7 @@ namespace FilmsStorage
             routes.MapRoute(
                 name: "Files",
                 url: "Files/{action}/File/{fileID}/User/{userID}",
-                defaults: new { controller = "Files", fileID = UrlParameter.Optional, userID = UrlParameter.Optional}
+                defaults: new { controller = "Files", fileID = UrlParameter.Optional, userID = UrlParameter.Optional }
                 );
 
             routes.MapRoute(

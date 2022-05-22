@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FilmsStorage.Resources.Views.Account {
+namespace FilmsStorage.Resources.Files {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace FilmsStorage.Resources.Views.Account {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class Add {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal Add() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FilmsStorage.Resources.Views.Account {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FilmsStorage.Resources.Views.Account.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FilmsStorage.Resources.Files.Add", typeof(Add).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,74 @@ namespace FilmsStorage.Resources.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello.
+        ///   Looks up a localized string similar to Back.
         /// </summary>
-        public static string Hello {
+        public static string Back {
             get {
-                return ResourceManager.GetString("Hello", resourceCulture);
+                return ResourceManager.GetString("Back", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Profile.
+        ///   Looks up a localized string similar to Choose File.
         /// </summary>
-        public static string PageTitle {
+        public static string ChooseFile {
             get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
+                return ResourceManager.GetString("ChooseFile", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Files.
+        ///   Looks up a localized string similar to Description.
         /// </summary>
-        public static string YourFiles {
+        public static string Description {
             get {
-                return ResourceManager.GetString("YourFiles", resourceCulture);
+                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Profile.
+        ///   Looks up a localized string similar to Film Name.
         /// </summary>
-        public static string YourProfile {
+        public static string FilmName {
             get {
-                return ResourceManager.GetString("YourProfile", resourceCulture);
+                return ResourceManager.GetString("FilmName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Genre.
+        /// </summary>
+        public static string Genre {
+            get {
+                return ResourceManager.GetString("Genre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Release Year.
+        /// </summary>
+        public static string ReleaseYear {
+            get {
+                return ResourceManager.GetString("ReleaseYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string UploadBtn {
+            get {
+                return ResourceManager.GetString("UploadBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Movie.
+        /// </summary>
+        public static string UploadTitle {
+            get {
+                return ResourceManager.GetString("UploadTitle", resourceCulture);
             }
         }
     }

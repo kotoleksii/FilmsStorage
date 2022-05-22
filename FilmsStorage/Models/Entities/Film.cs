@@ -11,16 +11,24 @@ namespace FilmsStorage.Models.Entities
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class Film
     {
         public long FilmID { get; set; }
+        [Display(Name = "FilmName", ResourceType = typeof(FilmsStorage.Resources.Files.Edit))]
         public string FilmName { get; set; }
+        [Display(Name = "ReleaseYear", ResourceType = typeof(FilmsStorage.Resources.Files.Edit))]
         public int ReleaseYear { get; set; }
+        [Display(Name = "Genre", ResourceType = typeof(FilmsStorage.Resources.Files.Edit))]
         public int fk_GenreID { get; set; }
         public int fk_UserID { get; set; }
+        [Display(Name = "FileName", ResourceType = typeof(FilmsStorage.Resources.Files.Edit))]
         public string FileName { get; set; }
+        [Display(Name = "FilePath", ResourceType = typeof(FilmsStorage.Resources.Files.Edit))]
         public string FilePath { get; set; }
+        [Display(Name = "FilmDescription", ResourceType = typeof(FilmsStorage.Resources.Files.Edit))]
         public string FilmDescription { get; set; }
     
         public virtual Genre Genre { get; set; }

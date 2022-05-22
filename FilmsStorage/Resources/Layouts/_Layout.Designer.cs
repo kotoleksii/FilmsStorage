@@ -113,14 +113,5 @@ namespace FilmsStorage.Resources.Layouts {
                 return ResourceManager.GetString("NavRegister", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload.
-        /// </summary>
-        public static string NavUpload {
-            get {
-                return ResourceManager.GetString("NavUpload", resourceCulture);
-            }
-        }
     }
 }
