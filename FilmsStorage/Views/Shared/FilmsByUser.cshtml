@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FilmsStorage.Models.Entities.v_Films>
 
 <p>
-    @Html.ActionLink("Upload New", "Add")
+    @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.UploadNew, "Add")
 </p>
 <table class="table">
     <tr>
@@ -36,9 +36,9 @@
                 @Html.DisplayFor(modelItem => item.GenreName)
             </td>
             <td>
-                @Html.ActionLink("Edit Film", "Edit", "Files", new { id = item.FilmID }, new { @class = "btn btn-warning" }) |
-                <button data-filmId="@item.FilmID" class="btn btn-info filmDetailsBtn">Details</button> |
-                @Html.ActionLink("Delete Film", "Delete", "Files", new { fileID = item.FilmID, userID = item.UserID }, new { @class = "btn btn-danger" })
+                @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.EditFilm, "Edit", "Files", new { id = item.FilmID }, new { @class = "btn btn-warning" }) |
+                <button data-filmId="@item.FilmID" class="btn btn-info filmDetailsBtn">@FilmsStorage.Resources.Views.Account.FilmsByUser.Details</button> |
+                @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.DeleteFilm, "Delete", "Files", new { fileID = item.FilmID, userID = item.UserID }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
@@ -49,21 +49,21 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">@FilmsStorage.Resources.Views.Account.FilmsByUser.Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
             <div class="modal-body">
-                <label for="detailsFilmNameTxt">Film Name: </label>
+                <label for="detailsFilmNameTxt">@FilmsStorage.Resources.Views.Account.FilmsByUser.FilmName: </label>
                 <input type="text" id="detailsFilmNameTxt" class="form-control" />
 
-                <label for="detailsFileNameTxt">File Name: </label>
+                <label for="detailsFileNameTxt">@FilmsStorage.Resources.Views.Account.FilmsByUser.FileName: </label>
                 <input type="text" id="detailsFileNameTxt" class="form-control" />
 
-                <label for="detailsFilePathTxt">File Path: </label>
+                <label for="detailsFilePathTxt">@FilmsStorage.Resources.Views.Account.FilmsByUser.FilePath: </label>
                 <input type="text" id="detailsFilePathTxt" class="form-control" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@FilmsStorage.Resources.Views.Account.FilmsByUser.Close</button>
             </div>
         </div>
     </div>

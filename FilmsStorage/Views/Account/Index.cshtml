@@ -1,16 +1,16 @@
 ﻿@*@model FilmsStorage.Models.Entities.User*@
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = FilmsStorage.Resources.Views.Account.Index.PageTitle;
 }
 
 <div class="text-center">
-    <h3>Your Profile</h3>
+    <h3>@FilmsStorage.Resources.Views.Account.Index.YourProfile</h3>
 
-    <p>Hello <b>@HttpContext.Current.User.Identity.Name</b>!</p>
+    <p>@FilmsStorage.Resources.Views.Account.Index.Hello <b>@HttpContext.Current.User.Identity.Name</b>!</p>
 </div>
 
-<h3>Your Files: </h3>
+<h3>@FilmsStorage.Resources.Views.Account.Index.YourFiles </h3>
 
 @{ Html.RenderPartial("ShowError");}
 

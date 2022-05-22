@@ -11,17 +11,23 @@ namespace FilmsStorage.Models.Entities
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class v_Films
     {
         public long FilmID { get; set; }
+
+        [Display(Name ="FilmName", ResourceType = typeof(FilmsStorage.Resources.Views.Account.FilmsByUser))]
         public string FilmName { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
+        [Display(Name = "FilmDescription", ResourceType = typeof(FilmsStorage.Resources.Views.Account.FilmsByUser))]
         public string FilmDescription { get; set; }
+        [Display(Name = "ReleaseYear", ResourceType = typeof(FilmsStorage.Resources.Views.Account.FilmsByUser))]
         public int ReleaseYear { get; set; }
         public int UserID { get; set; }
         public int GenreID { get; set; }
+        [Display(Name = "GenreName", ResourceType = typeof(FilmsStorage.Resources.Views.Account.FilmsByUser))]
         public string GenreName { get; set; }
     }
 }

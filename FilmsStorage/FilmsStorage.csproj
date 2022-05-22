@@ -173,6 +173,16 @@
     <Content Include="Models\Entities\FilmsDBModel.edmx.diagram">
       <DependentUpon>FilmsDBModel.edmx</DependentUpon>
     </Content>
+    <EmbeddedResource Include="Resources\Views\Account\FilmsByUser.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FilmsByUser.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Account\FilmsByUser.uk.resx" />
+    <EmbeddedResource Include="Resources\Views\Account\Index.uk.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.uk.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -233,6 +243,26 @@
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\Serialization\UserSerializatonModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Layouts\_Layout.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Account\FilmsByUser.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilmsByUser.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Account\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Account\Index.uk.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.uk.resx</DependentUpon>
+    </Compile>
     <Compile Include="SL\FileSaveResult.cs" />
     <Compile Include="SL\_SL.cs" />
     <Compile Include="Validators\AuditPasswordAttribute.cs" />
@@ -264,10 +294,22 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="BLL\" />
+    <Folder Include="Resources\Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Layouts\_Layout.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>_Layout.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Layouts\_Layout.uk.resx" />
+    <EmbeddedResource Include="Resources\Views\Account\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

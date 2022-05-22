@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Films Storage</title>
+    <title>@ViewBag.Title - @FilmsStorage.Resources.Layouts._Layout.ApplicationName </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modern")
 </head>
@@ -14,17 +14,17 @@
         <div class="container">
             <div class="navbar-collapse">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item me-2 mb-2">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-success" }) </li>
+                    <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavHome, "Index", "Home", null, new { @class = "btn btn-success" }) </li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item me-2 mb-2">@Html.ActionLink("My Profile", "Index", "Account", null, new { @class = "btn btn-info" }) </li>
-                        <li class="nav-item me-2 mb-2">@Html.ActionLink("Upload", "Add", "Files", null, new { @class = "btn btn-warning" }) </li>
-                        <li class="nav-item me-2 mb-2">@Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn btn-danger" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavMyProfile, "Index", "Account", null, new { @class = "btn btn-info" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavUpload, "Add", "Files", null, new { @class = "btn btn-warning" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavLogout, "Logout", "Account", null, new { @class = "btn btn-danger" }) </li>
                     }
                     else
                     {
-                        <li class="nav-item me-2 mb-2">@Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-info" }) </li>
-                        <li class="nav-item me-2 mb-2">@Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-success" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavRegister, "Register", "Account", null, new { @class = "btn btn-info" }) </li>
+                        <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavLogin, "Login", "Account", null, new { @class = "btn btn-success" }) </li>
                     }
                 </ul>
             </div>
@@ -37,7 +37,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Films Storage</p>
+            <p>&copy; @DateTime.Now.Year - @FilmsStorage.Resources.Layouts._Layout.ApplicationName</p>
         </footer>
     </div>
 
