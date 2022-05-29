@@ -147,6 +147,9 @@
   <data name="ReleaseYear" xml:space="preserve">
     <value>Рік прем`єри</value>
   </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Зберегти зміни</value>
+  </data>
   <data name="UploadNew" xml:space="preserve">
     <value>Завантажити</value>
   </data>

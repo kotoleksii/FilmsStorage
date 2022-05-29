@@ -151,6 +151,15 @@ namespace FilmsStorage.Resources.Views.Account {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save Changes.
+        /// </summary>
+        public static string SaveChanges {
+            get {
+                return ResourceManager.GetString("SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload New.
         /// </summary>
         public static string UploadNew {

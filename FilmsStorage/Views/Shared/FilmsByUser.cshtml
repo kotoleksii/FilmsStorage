@@ -36,7 +36,8 @@
                 @Html.DisplayFor(modelItem => item.GenreName)
             </td>
             <td>
-                @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.EditFilm, "Edit", "Files", new { id = item.FilmID }, new { @class = "btn btn-success" }) |
+                <button data-filmId="@item.FilmID" class="btn btn-success filmEditBtn">@FilmsStorage.Resources.Views.Account.FilmsByUser.EditFilm</button> |
+               @* @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.EditFilm, "Edit", "Files", new { id = item.FilmID }, new { @class = "btn btn-success" }) |*@
                 <button data-filmId="@item.FilmID" class="btn btn-info filmDetailsBtn">@FilmsStorage.Resources.Views.Account.FilmsByUser.Details</button> |
                 @Html.ActionLink(FilmsStorage.Resources.Views.Account.FilmsByUser.DeleteFilm, "Delete", "Files", new { fileID = item.FilmID, userID = item.UserID }, new { @class = "btn btn-danger" })
             </td>
@@ -70,9 +71,103 @@
 </div>
 
 
+<div class="modal" id="filmEditPopUp" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@FilmsStorage.Resources.Views.Account.FilmsByUser.EditFilm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="editFilmNameTxt">@FilmsStorage.Resources.Views.Account.FilmsByUser.FilmName: </label>
+                <input type="text" id="editFilmNameTxt" class="form-control" />
+                <label for="editReleaseYearTxt">@FilmsStorage.Resources.Views.Account.FilmsByUser.ReleaseYear: </label>
+                <input type="text" id="editReleaseYearTxt" class="form-control" />
+            </div>
+            <input type="hidden" id="editFilmID" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSaveFilm">@FilmsStorage.Resources.Views.Account.FilmsByUser.SaveChanges</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@FilmsStorage.Resources.Views.Account.FilmsByUser.Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
 
+
     const filmDetailPopUp = new bootstrap.Modal('#filmDetailsPopUp');
+    const filmEditPopUp = new bootstrap.Modal('#filmEditPopUp');
+
+    $('.filmEditBtn').click(function () {
+
+        const filmID = this.dataset.filmid;
+
+        $.get(
+            "/uk/files/Details4Js",
+            { fileID: filmID }
+        ).done(function (data) {
+            if (data) {
+
+                $('#editFilmNameTxt').val(data.FilmName);
+                $('#editReleaseYearTxt').val(data.ReleaseYear);
+
+                $('#editFilmID').val(filmID);
+
+                filmEditPopUp.show();
+            }
+        }).fail(function (error) {
+            console.log(error.responseText)
+        });
+    });
+
+    //$("#btnSaveFilm").click(function () {
+
+    //    const filmID = $('#editFilmID').val();
+    //    const filmName = $('#editFilmNameTxt').val();
+    //    const releaseYear = $('#editReleaseYearTxt').val();
+
+    //    const editFilmData = new FormData();
+
+    //    editFilmData.append("FilmID", filmID);
+    //    editFilmData.append("FilmName", filmName);
+    //    editFilmData.append("ReleaseYear", releaseYear);
+
+    //    $.ajax({
+    //        url: '/uk/files/Details4Js',
+    //        data: editFilmData,
+    //        type: 'POST',
+    //        processData: false,
+    //        contentType: false,
+    //        success: function (data) { },
+    //        error: function (error) { console.log(error.responseText) }
+    //    });
+    //});
+
+    //Send data as JSON
+    $("#btnSaveFilm").click(function () {
+
+        const filmID = $('#editFilmID').val();
+        const filmName = $('#editFilmNameTxt').val();
+        const releaseYear = $('#editReleaseYearTxt').val();
+
+        const filmData = {
+            FilmID: filmID,
+            filmName: filmName,
+            ReleaseYear: releaseYear
+        };
+
+        $.ajax({
+            url: '/uk/files/Details4Js',
+            data: JSON.stringify(filmData),
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) { },
+            error: function (error) { console.log(error.responseText) }
+        });
+    });
 
     $('.filmDetailsBtn').click(function () {
 

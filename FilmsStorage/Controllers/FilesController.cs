@@ -6,6 +6,7 @@ using FilmsStorage.SL;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Web.Mvc;
 
 namespace FilmsStorage.Controllers
@@ -117,6 +118,20 @@ namespace FilmsStorage.Controllers
                 return RedirectToAction("Index", "Account");
             }
         }
+
+        //public JsonResult Edit4JS(Film updatedFilm)
+        //{
+        //    bool updateResult = _DAL.Films.Edit(updatedFilm);
+
+        //    return Json(updateResult);
+        //}
+
+        //public JsonResult Edit4JS()
+        //{
+        //    string jsonObjectFromRequest = new StreamReader(Request.InputStream).ReadToEnd();
+
+        //    return Json(true);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -123,6 +123,11 @@ namespace FilmsStorage.DAL
                 return userFilms;
             }
 
+            //internal static bool Edit(Film updatedFilm)
+            //{
+            //    return true;
+            //}
+
             public static Film FilmByID(int filmID)
             {
                 Film filmByID = null;
