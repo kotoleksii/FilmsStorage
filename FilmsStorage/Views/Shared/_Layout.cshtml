@@ -25,11 +25,9 @@
                         <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavRegister, "Register", "Account", null, new { @class = "btn btn-info" }) </li>
                         <li class="nav-item me-2 mb-2">@Html.ActionLink(FilmsStorage.Resources.Layouts._Layout.NavLogin, "Login", "Account", null, new { @class = "btn btn-success" }) </li>
                     }
+                    <li class="nav-item me-1 mb-2">@Html.ActionLink("EN", "", new { lang = "en" }, new { @class = "btn btn-light" })</li>
+                    <li class="nav-item mb-2">@Html.ActionLink("UA", "", new { lang = "uk" }, new { @class = "btn btn-light" })</li>
                 </ul>
-                <select class="form-select w-auto mb-2">
-                    <option value="en">EN</option>
-                    <option value="uk">UK</option>
-                </select>
             </div>
         </div>
     </nav>
